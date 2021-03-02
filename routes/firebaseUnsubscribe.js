@@ -19,7 +19,6 @@ router.post("/", (req, res, next) => {
     triviaRef.on("value", function(snapshot) {
         snapshot.forEach(function(data) {
             trivia.push(data.val().Question);
-        console.log(data.val().Question);
         });
     });
     // phoneNumbers = []

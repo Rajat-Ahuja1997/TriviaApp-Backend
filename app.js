@@ -11,6 +11,7 @@ var testAPIRouter = require('./routes/testAPI');
 var firebaseRouter = require('./routes/firebaseSubscribe');
 var unsubscribeRouter = require('./routes/firebaseUnsubscribe');
 var sendTextRouter = require('./routes/sendText');
+var retrieveFactRouter = require('./routes/retrieveFact');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/testAPI', testAPIRouter);
 app.use('/firebaseSubscribe', firebaseRouter);
 app.use('/firebaseUnsubscribe', unsubscribeRouter);
 app.use('/sendText', sendTextRouter);
+app.use('/retrieveFact', retrieveFactRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
