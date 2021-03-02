@@ -1,6 +1,6 @@
+#! /app/.heroku/node/bin/node
+
 var admin = require('firebase-admin');
-var express = require('express');
-var router = express.Router();
 var twilio = require('twilio');
 
 var accountSid = 'AC1295bdfcebc3ead465311e126b19e01b'; // Your Account SID from www.twilio.com/console
@@ -9,7 +9,7 @@ var authToken = 'b5815c7adf0f2f38d8c46ced9329a1fe';   // Your Auth Token from ww
 var client = new twilio(accountSid, authToken);
 var db = admin.database();
 
-router.post("/", (req, res, next) => {
+function sendText() {
     let trivia = [];
     var triviaRef = db.ref("/Trivia");
     triviaRef.on("value", function(snapshot) {
@@ -24,7 +24,6 @@ router.post("/", (req, res, next) => {
             phoneNumbers.push(data.key);
         })
     });
-    console.log("reached here");
 
     for (let phone_number of phoneNumbers) {
         const receiver = "+1" + phone_number;
@@ -35,10 +34,6 @@ router.post("/", (req, res, next) => {
             from: '+14159426955' // From a valid Twilio number
         })
     }
-});
-
-Array.prototype.random = function () {
-    return this[Math.floor((Math.random()*this.length))];
 }
-
-module.exports = router;
+sendText();
+process.exit();
