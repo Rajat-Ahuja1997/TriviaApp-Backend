@@ -24,7 +24,6 @@ router.post("/", (req, res, next) => {
             phoneNumbers.push(data.key);
         })
     });
-    console.log("reached here");
 
     for (let phone_number of phoneNumbers) {
         const receiver = "+1" + phone_number;
