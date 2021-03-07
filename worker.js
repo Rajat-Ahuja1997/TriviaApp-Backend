@@ -23,11 +23,22 @@ function sendText() {
             trivia.push(data.val().Question);
         });
     });
-    client.messages.create({
-        body: "this is a heroku scheduler test",
-        to: '+12259541125',  // Text this number
-        from: '+14159426955' // From a valid Twilio number
+    var phoneRef = db.ref("/phone_numbers");
+    phoneNumbers = []
+    phoneRef.orderByValue().equalTo("subscribed").on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+            phoneNumbers.push(data.key);
+        })
     });
+    for (let phone_number of phoneNumbers) {
+        const receiver = "+1" + phone_number;
+        const body = trivia.random();
+        client.messages.create({
+            body: body,
+            to: receiver,  // Text this number
+            from: '+14159426955' // From a valid Twilio number
+        });
+    }
 }
 
 Array.prototype.random = function () {

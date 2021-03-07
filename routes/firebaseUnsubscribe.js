@@ -22,7 +22,6 @@ router.post("/", (req, res, next) => {
         })
         
     })
-    console.log(phoneNumbers);
     if (phoneNumbers.includes(req.body.user.number)) {
         ref.update({
             [req.body.user.number]: "unsubscribed"
