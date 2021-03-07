@@ -23,15 +23,15 @@ function sendText() {
             trivia.push(data.val().Question);
         });
     });
-    // client.messages.create({
-    //     body: triviaQuestion,
-    //     to: '+12259541125',  // Text this number
-    //     from: '+14159426955' // From a valid Twilio number
-    // });
+    client.messages.create({
+        body: "this is a heroku scheduler test",
+        to: '+12259541125',  // Text this number
+        from: '+14159426955' // From a valid Twilio number
+    });
 }
 
-// Array.prototype.random = function () {
-//     return this[Math.floor((Math.random()*this.length))];
-// }
+Array.prototype.random = function () {
+    return this[Math.floor((Math.random()*this.length))];
+}
 
 sendText();
